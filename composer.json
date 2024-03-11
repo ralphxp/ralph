@@ -14,6 +14,9 @@
             "email": "raphapanchi@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
-    "require": {}
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.2.5 || ^8.0"
+    },
+    "prefer-stable": true
 }
