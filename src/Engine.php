@@ -4,7 +4,7 @@ namespace Bird\Ralph;
 
 class Engine{
 
-    static $cache_path = __DIR__.'/cache/';
+    static $cache_path = 'cache/';
     static $cache_enabled = FALSE;
     static $yields = [];
 
@@ -13,7 +13,7 @@ class Engine{
         $data = []
     ){
         extract($data, EXTR_SKIP);
-        $viewpath = __DIR__."/views/";
+        $viewpath = "views/";
         $file = $viewpath.$viewName;
         $cached_file = self::cache($file);
 	    extract($data, EXTR_SKIP);
@@ -61,23 +61,18 @@ class Engine{
     public static function parseTemplate($file)
     {
         $content = self::loadFile($file);
+        $code = $content;
 		preg_match_all('/[@#](template|extends)\([\s*\'\"](.+?)[\'\"\s*]\)/i', $content, $matches, PREG_SET_ORDER);
-        $template = $matches[0][2];
-        $template = __DIR__.'/views/'.str_replace(".",'/', $template);
-        $template = file_get_contents($template.'.bird.php');
-		$content = preg_replace('/[@#](template|extends)\(\s*(.+?)\s*\)/i', '', $content);
+        if(count($matches) > 0){
+            $template = $matches[0][2];
+            $template = 'views/'.str_replace(".",'/', $template);
+            $template = file_get_contents($template.'.bird.php');
+            $content = preg_replace('/[@#](template|extends)\(\s*(.+?)\s*\)/i', '', $content);
+        
 
-        $code = self::parseYield($template, $content);
-		
-        // return $code;
-        // if(count($matches) > 1)
-        // {
-        //     return "<h4>Engine can't inherit more than one templates at once</h4>";
-        // }
-		// foreach ($matches as $value) {
-        //     $inc = ,$value[2]);
-		// 	$content = str_replace($value[0], self::parseTemplate($inc), $content);
-		// }
+            $code = self::parseYield($template, $content);
+		}
+        
 
         return $code;
     }
