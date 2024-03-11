@@ -1,6 +1,6 @@
 {
     "name": "bird/ralph",
-    "description": "simple view engine for rapid development",
+    "description": "Simple micro view engine for bird framework",
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -14,5 +14,6 @@
             "email": "raphapanchi@gmail.com"
         }
     ],
+    "minimum-stability": "stable",
     "require": {}
 }
