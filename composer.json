@@ -1,11 +1,11 @@
 {
-    "name": "bird/ralph",
-    "description": "Simple micro view engine for bird framework",
+    "name": "ralph/templater",
+    "description": "Simple micro view engine for Comic framework",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Bird\\Ralph\\": "src/"
+            "Ralph\\Templater\\": "src/"
         }
     },
     "authors": [

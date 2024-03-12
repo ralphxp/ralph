@@ -1,5 +1,5 @@
 <?php
-namespace Bird\Ralph;
+namespace Comic\App\Template;
 
 
 class Engine{
@@ -13,7 +13,7 @@ class Engine{
         $data = []
     ){
         extract($data, EXTR_SKIP);
-        $viewpath = "views/";
+        $viewpath = getcwd()."/views/";
         $file = $viewpath.$viewName;
         $cached_file = self::cache($file);
 	    extract($data, EXTR_SKIP);
@@ -23,7 +23,7 @@ class Engine{
 
     static function cache($file) {
 		if (!file_exists(self::$cache_path)) {
-		  	mkdir(self::$cache_path, 0744);
+		  	mkdir(getcwd().self::$cache_path, 0744);
 		}
 	    $cached_file = self::$cache_path . str_replace(array('/'), array('/'), 'cache.php');
 	    if ( !self::$cache_enabled || !file_exists($cached_file) ) {
@@ -39,10 +39,18 @@ class Engine{
     {
         $content = str_replace("{{", "<?php ", $content);
         $content = str_replace("}}", " ?>", $content);
+        $content = self::parseComment($content);
         $content = self::parseIf($content);
         $content = self::parseEcho( $content);
 
         return $content;
+    }
+
+    public static function parseComment($code)
+    {
+        $code = preg_replace('/\{\# \s*(.+?)\s*(.+?)\#\}/i', '', $code);
+       
+        return $code;
     }
 
     public static function parseIf($content)
@@ -65,8 +73,8 @@ class Engine{
 		preg_match_all('/[@#](template|extends)\([\s*\'\"](.+?)[\'\"\s*]\)/i', $content, $matches, PREG_SET_ORDER);
         if(count($matches) > 0){
             $template = $matches[0][2];
-            $template = 'views/'.str_replace(".",'/', $template);
-            $template = file_get_contents($template.'.bird.php');
+            $template = getcwd().'/views/'.str_replace(".",'/', $template);
+            $template = file_get_contents($template.'.blade.php');
             $content = preg_replace('/[@#](template|extends)\(\s*(.+?)\s*\)/i', '', $content);
         
 
@@ -99,7 +107,7 @@ class Engine{
     }
 
     public static function loadFile($file){
-        $content = file_get_contents($file.'.bird.php');
+        $content = file_get_contents($file.'.blade.php');
         return $content;
     }
 
