@@ -1,5 +1,5 @@
 <?php
-namespace Comic\App\Template;
+namespace Codx\Ralph;
 
 
 class Engine{
