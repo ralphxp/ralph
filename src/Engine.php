@@ -107,6 +107,7 @@ class Engine{
     }
 
     public static function loadFile($file){
+        $file = str_replace('.', '/', $file);
         $content = file_get_contents($file.'.blade.php');
         return $content;
     }
