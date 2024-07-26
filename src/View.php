@@ -1,5 +1,5 @@
 <?php 
-namespace Ralph;
+namespace Bird\Ralph;
 
 use Engine;
 
@@ -8,6 +8,6 @@ class View{
         $viewName, 
         $data = []
     ){
-        return Engine::view($viewName, $data);
+        Engine::view($viewName, $data);
     }
 }

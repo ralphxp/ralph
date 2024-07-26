@@ -1,6 +1,6 @@
 {
     "name": "codx/ralph",
-    "description": "Simple micro view engine for bird framework",
+    "description": "Default view engine for codx framework",
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -14,10 +14,5 @@
             "email": "raphapanchi@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {
-        "php": "^7.2.5 || ^8.0"
-    },
-    "prefer-stable": true
-
+    "minimum-stability": "stable"
 }

@@ -6,5 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Bird\\Ralph\\View' => $baseDir . '/src/View.php',
+    'Codx\\Ralph\\Engine' => $baseDir . '/src/Engine.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
 );

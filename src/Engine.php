@@ -1,5 +1,5 @@
 <?php
-namespace Ralph;
+namespace Codx\Ralph;
 
 
 class Engine{
@@ -37,6 +37,8 @@ class Engine{
 
     public static function compileCode($content)
     {
+        $content = str_replace("{{--", "<!--", $content);
+        $content = str_replace("--}}", " -->", $content);
         $content = str_replace("{{", "<?php ", $content);
         $content = str_replace("}}", " ?>", $content);
         $content = self::parseIf($content);
@@ -66,7 +68,7 @@ class Engine{
         if(count($matches) > 0){
             $template = $matches[0][2];
             $template = 'views/'.str_replace(".",'/', $template);
-            $template = file_get_contents($template.'.bird.php');
+            $template = file_get_contents($template.'.blade.php');
             $content = preg_replace('/[@#](template|extends)\(\s*(.+?)\s*\)/i', '', $content);
         
 
@@ -99,7 +101,7 @@ class Engine{
     }
 
     public static function loadFile($file){
-        $content = file_get_contents($file.'.bird.php');
+        $content = file_get_contents($file.'.blade.php');
         return $content;
     }
 

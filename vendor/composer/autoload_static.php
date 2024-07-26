@@ -21,6 +21,8 @@ class ComposerStaticInitfabdb31bfdcf9ea7e7dbeae1f74ac822
     );
 
     public static $classMap = array (
+        'Bird\\Ralph\\View' => __DIR__ . '/../..' . '/src/View.php',
+        'Codx\\Ralph\\Engine' => __DIR__ . '/../..' . '/src/Engine.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
